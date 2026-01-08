@@ -44,4 +44,5 @@ and suggests the correct disposal method using a simple web application.
 ## Team Members
 Aarshi Gautam  
 Bhumika Mansukhani
+
 Hackathon Project – AI Waste Segregation MVP
