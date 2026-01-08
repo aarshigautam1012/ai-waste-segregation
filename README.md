@@ -41,6 +41,7 @@ and suggests the correct disposal method using a simple web application.
 - Mobile application
 - Smart city integration
 
-## Author
+## Team Members
 Aarshi Gautam  
+Bhumika Mansukhani
 Hackathon Project – AI Waste Segregation MVP
