@@ -1,48 +1,36 @@
-function analyzeWaste() {
+document.getElementById("analyzeBtn").addEventListener("click", () => {
   const fileInput = document.getElementById("imageInput");
-  const status = document.getElementById("status");
-  const result = document.getElementById("result");
-
-  // Clear old result
-  result.innerHTML = "";
+  const resultDiv = document.getElementById("result");
 
   if (!fileInput.files.length) {
-    status.innerText = "⚠ Please upload an image first.";
+    resultDiv.innerHTML = "❌ Please select an image first";
     return;
   }
 
-  status.innerText = "🔍 Analyzing image...";
+  const fileName = fileInput.files[0].name.toLowerCase();
 
-  const file = fileInput.files[0];
-  const reader = new FileReader();
+  let wasteType = "Unknown Waste";
+  let binType = "Manual segregation required";
 
-  reader.onloadend = function () {
-    const imageBase64 = reader.result.split(",")[1];
+  if (fileName.includes("banana") || fileName.includes("food")) {
+    wasteType = "Organic Waste";
+    binType = "Green Bin";
+  } else if (fileName.includes("paper") || fileName.includes("newspaper")) {
+    wasteType = "Paper Waste";
+    binType = "Blue Bin";
+  } else if (fileName.includes("plastic") || fileName.includes("bottle")) {
+    wasteType = "Plastic Waste";
+    binType = "Red Bin";
+  } else if (fileName.includes("metal") || fileName.includes("can")) {
+    wasteType = "Metal Waste";
+    binType = "Yellow Bin";
+  } else if (fileName.includes("battery") || fileName.includes("charger")) {
+    wasteType = "E-Waste";
+    binType = "Authorized E-Waste Center";
+  }
 
-    fetch("/analyze", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        imageBase64: imageBase64,
-        fileName: file.name
-      })
-    })
-      .then(response => response.json())
-      .then(data => {
-        status.innerText = "✅ Analysis Complete";
-
-        result.innerHTML = `
-          <strong>🗑 Waste Type:</strong> ${data.wasteType}<br>
-          <strong>♻ Disposal Bin:</strong> ${data.binType}
-        `;
-      })
-      .catch(error => {
-        console.error(error);
-        status.innerText = "❌ Error analyzing image";
-      });
-  };
-
-  reader.readAsDataURL(file);
-}
-
-
+  resultDiv.innerHTML = `
+    ✅ <b>Waste Type:</b> ${wasteType}<br>
+    🗑️ <b>Dispose In:</b> ${binType}
+  `;
+});
