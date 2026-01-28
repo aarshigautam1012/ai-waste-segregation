@@ -24,7 +24,7 @@ document.getElementById("analyzeBtn").addEventListener("click", () => {
   } else if (fileName.includes("metal") || fileName.includes("can")) {
     wasteType = "Metal Waste";
     binType = "Yellow Bin";
-  } else if (fileName.includes("Electronics") || fileName.includes("charger")) {
+  } else if (fileName.includes("Battery") || fileName.includes("charger")) {
     wasteType = "E-Waste";
     binType = "Authorized E-Waste Center";
   }
